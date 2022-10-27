@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Jira Slot planning",
+    "description": "Данный скрипт позволяет планировать по лимитам задачи",
+    "termsOfService": "",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5001/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Issue plannig",
+      "description": "Работа с планом"
+    }
+  ],
+  "paths": {
+    "/issue/planning": {
+      "post": {
+        "tags": [
+          "Issue plannig"
+        ],
+        "summary": "Составить график",
+        "description": "Составить график",
+        "operationId": "planning",
+        "requestBody": {
+          "description": "Настройки планирования и задачи по которым необходимо провести планирование",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Planrequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно"
+          },
+          "400": {
+            "description": "Неверные параметры"
+          }
+        }
+      }
+    },
+    "/issue/planOndate": {
+      "post": {
+        "tags": [
+          "Issue plannig"
+        ],
+        "summary": "Получить значения полей на определнную дату",
+        "description": "Получить значения полей на определнную дату",
+        "operationId": "getsplandate",
+        "requestBody": {
+          "description": "Поля и дата на которую необходимо получить информацию по массиву key",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Planondate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно"
+          },
+          "400": {
+            "description": "Не хватает параметров"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Planrequest": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "calculateLimitToDays": {
+                "type": "integer",
+                "format": "int32",
+                "example": 10
+              },
+              "wiplimits": {
+                "type": "integer",
+                "format": "int32",
+                "example": 22
+              },
+              "dayToRenewal": {
+                "type": "integer",
+                "format": "int32",
+                "example": 1
+              },
+              "updateIssuesDates": {
+                "type": "boolean",
+                "example": false
+              },
+              "startDateField": {
+                "type": "string",
+                "example": "customfield_12603"
+              },
+              "endDateField": {
+                "type": "string",
+                "example": "customfield_12604"
+              },
+              "planningLT": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "duration": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "WIPLImit": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  },
+                  "example": [
+                    {
+                      "name": "Integration",
+                      "duration": 167,
+                      "WIPLImit": 10
+                    },
+                    {
+                      "name": "История",
+                      "duration": 72,
+                      "WIPLImit": 10
+                    },
+                    {
+                      "name": "Change request",
+                      "duration": 42,
+                      "WIPLImit": 4
+                    },
+                    {
+                      "name": "technical",
+                      "duration": 45,
+                      "WIPLImit": 9
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": [
+                "RUS-32289",
+                "RUS-32153"
+              ]
+            }
+          }
+        }
+      },
+      "Planondate": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "dateFirst": {
+                "type": "string",
+                "format": "date",
+                "example": "2022-08-16"
+              },
+              "startDateFieldName": {
+                "type": "string",
+                "example": "wfc date"
+              },
+              "endDateFieldName": {
+                "type": "string",
+                "example": "done date"
+              }
+            }
+          },
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": [
+                "RUS-32289",
+                "RUS-32153"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Planrequest": {
+        "description": "Json c запланированнымим датами",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Planrequest"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "node16",
+    "esModuleInterop": true,
+    "target": "ES2022",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    //"noFallthroughCasesInSwitch": true, //
+    //"isolatedModules": false, //
+    "strict": true,
+    "noImplicitAny": false, //
+    //"useUnknownInCatchVariables": false, //
+    //"skipLibCheck": true,
+    //"inlineSourceMap": true, //
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "lib": [
+    "esnext"
+  ]
+}

@@ -1,0 +1,2 @@
+docker build . -t blockeranalisator/web-app0.01a
+docker image save -o BA.01a.tar blockeranalisator/web-app0.01a

@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "mongoUri": "mongodb+srv://LCGroup:O3UyUueKUKd7QvtR@cluster0.gs8g3.mongodb.net/LCgroup"
+
+}
